@@ -37,7 +37,7 @@ export function Header() {
             <div className="h-8 w-8 bg-primary rounded-md flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">E</span>
             </div>
-            <span className="font-bold text-xl">{locale === "ar" ? "متجر إلكتروني" : "ECommerce"}</span>
+            <span className="font-bold text-xl">{t("store.name")}</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -115,6 +115,14 @@ export function Header() {
                     <DropdownMenuItem asChild>
                       <Link href="/wishlist">{t("navigation.wishlist")}</Link>
                     </DropdownMenuItem>
+                    {user.role === "admin" && (
+                      <>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild>
+                          <Link href="/admin">{t("navigation.dashboard")}</Link>
+                        </DropdownMenuItem>
+                      </>
+                    )}
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={logout} className="text-destructive">
                       {t("auth.logout")}
@@ -123,10 +131,10 @@ export function Header() {
                 ) : (
                   <>
                     <DropdownMenuItem asChild>
-                      <Link href="/login">{t("auth.login")}</Link>
+                      <Link href="/auth/login">{t("auth.login")}</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/register">{t("auth.register")}</Link>
+                      <Link href="/auth/register">{t("auth.register")}</Link>
                     </DropdownMenuItem>
                   </>
                 )}
